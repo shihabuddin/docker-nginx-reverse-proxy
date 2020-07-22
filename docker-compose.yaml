@@ -1,0 +1,14 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx-reverse-proxy
+    volumes:
+      - ./src/bin/start.sh:/bin/nginx-reverse-proxy
+      - ./src/conf/nginx.conf.template:/etc/nginx/nginx.conf.template
+      - ./.cache:/var/cache/nginx-reverse-proxy
+    ports:
+      - ${PORT:-80}:80
+    environment:
+      - PROXY_HOST=${PROXY_HOST:-http://storage.googleapis.com}
+    command: /bin/nginx-reverse-proxy

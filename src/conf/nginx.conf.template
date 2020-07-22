@@ -1,0 +1,23 @@
+events {
+}
+
+http {
+  client_max_body_size 20m;
+  
+  proxy_cache_path /var/cache/nginx-reverse-proxy keys_zone=one:500m max_size=1000m;
+
+  server {
+    server_name localhost;
+    proxy_cache one;
+    proxy_cache_key $request_method$request_uri;
+    proxy_cache_min_uses 1;
+    proxy_cache_methods GET;
+    proxy_cache_valid 200 1y;
+
+    location / {
+      proxy_pass ${PROXY_HOST};
+    }
+
+    listen 80;
+  } 
+}
