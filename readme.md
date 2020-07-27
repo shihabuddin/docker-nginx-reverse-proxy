@@ -8,7 +8,7 @@ $ cd docker-nginx-reverse-proxy
 $ echo "PORT=9090" >.env
 $ echo "PROXY_HOST=http://storage.googleapis.com" >>.env
 $ docker-compose up --build -d
-$ curl -v http://localhost:9090/some/path/some-file.zip # http://storage.googleapis.com/some-file.zip
+$ curl -v http://localhost:9090/some/path/some-file.zip # http://storage.googleapis.com/some/path/some-file.zip
 ```
 
 ## Environment Variables
